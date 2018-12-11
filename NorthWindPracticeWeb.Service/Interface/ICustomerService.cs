@@ -9,12 +9,11 @@ namespace NorthWindPracticeWeb.Service.Interface
 
         void CreateCustomer(CustomerDto dtoModel);
 
-        void EditCustomer(string customerId);
+        void EditCustomer(CustomerDto dtoModel);
 
-        CustomerDto GetCustomerById();
+        CustomerDto GetCustomerById(string customerId);
 
         void DeleteCustomer(string customerId);
 
-        IEnumerable<CustomerDto> GetCustomersWithPages(int pageNumber, int pageSize);
     }
 }
