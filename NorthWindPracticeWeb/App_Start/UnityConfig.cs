@@ -1,6 +1,11 @@
+using NorthWindPracticeWeb.Repository;
+using NorthWindPracticeWeb.Repository.Interfaces;
 using System;
-
+using NorthWindPracticeWeb.Service.DTOs;
 using Unity;
+using NorthWindPracticeWeb.Repository.Models;
+using NorthWindPracticeWeb.Service;
+using NorthWindPracticeWeb.Service.Interface;
 
 namespace NorthWindPracticeWeb
 {
@@ -42,6 +47,14 @@ namespace NorthWindPracticeWeb
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
+
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
+
+            // Repository
+            container.RegisterType<IGenericRepository<Customers>, GenericRepository<Customers>>();
+
+            // Service
+            container.RegisterType<ICustomerService, CustomerService>();
         }
     }
 }
