@@ -24,6 +24,7 @@ namespace NorthWindPracticeWeb.Areas.Customer.Controllers
 
         public ActionResult List(int pageNumber = 1, int pageSize = 20)
         {
+            
             return View("_List");
         }
         public ActionResult Create()
