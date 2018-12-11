@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Models\Alphabetical_list_of_products.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Category_Sales_for_1997.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Models\Suppliers.cs" />
     <Compile Include="Models\Territories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
