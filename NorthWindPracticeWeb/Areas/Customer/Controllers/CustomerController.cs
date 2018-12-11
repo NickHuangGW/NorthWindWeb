@@ -26,6 +26,17 @@ namespace NorthWindPracticeWeb.Areas.Customer.Controllers
         {
             return View("_List");
         }
-
+        public ActionResult Create()
+        {
+            return View();
+        }
+        public ActionResult Edit(string customerId)
+        {
+            return View(_customerService.GetCustomerById(customerId));
+        }
+        public ActionResult Delete(string customerId)
+        {
+            return View(_customerService.GetCustomerById(customerId));
+        }
     }
 }

@@ -161,6 +161,9 @@
     <Content Include="Areas\Customer\Views\web.config" />
     <Content Include="Areas\Customer\Views\Customer\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Customer\_List.cshtml" />
+    <Content Include="Areas\Customer\Views\Customer\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Customer\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Customer\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
