@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using NorthWindPracticeWeb.Models;
+using NorthWindPracticeWeb.Service.DTOs;
 using NorthWindPracticeWeb.Service.Interface;
 
 namespace NorthWindPracticeWeb.Areas.Customer.Controllers
@@ -24,8 +27,10 @@ namespace NorthWindPracticeWeb.Areas.Customer.Controllers
 
         public ActionResult List(int pageNumber = 1, int pageSize = 20)
         {
-            
-            return View("_List");
+            var dtoModels = _customerService.GetCustomers();
+            var viewModels =
+                Mapper.Map<IEnumerable<CustomerDto>, IEnumerable<CustomerViewModel>>(dtoModels);
+            return View("_List", viewModels);
         }
         public ActionResult Create()
         {

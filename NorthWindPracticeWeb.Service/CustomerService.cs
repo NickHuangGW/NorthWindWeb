@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using NorthWindPracticeWeb.Repository.Interfaces;
 using NorthWindPracticeWeb.Repository.Models;
 using NorthWindPracticeWeb.Service.DTOs;
@@ -18,42 +19,16 @@ namespace NorthWindPracticeWeb.Service
 
         public IEnumerable<CustomerDto> GetCustomers()
         {
-            foreach (var dt in _customerRepository.GetAll())
-            {
-                var customerDto = new CustomerDto
-                {
-                    Address = dt.Address,
-                    City = dt.City,
-                    CompanyName = dt.CompanyName,
-                    ContactName = dt.ContactName,
-                    ContactTitle = dt.ContactTitle,
-                    Country = dt.Country,
-                    CustomerID = dt.CustomerID,
-                    Fax = dt.Fax,
-                    Phone = dt.Phone,
-                    PostalCode = dt.PostalCode,
-                    Region = dt.Region
-                };
-                yield return customerDto;
-            }
+            var models = _customerRepository.GetAll();
+            var dtoModels =
+                Mapper.Map<IEnumerable<Customers>, IEnumerable<CustomerDto>>(models);
+            return dtoModels;
         }
 
         public void CreateCustomer(CustomerDto dtoModel)
         {
-            var customer = new Customers
-            {
-                Address = dtoModel.Address,
-                Region = dtoModel.Region,
-                PostalCode = dtoModel.PostalCode,
-                Phone = dtoModel.Phone,
-                Fax = dtoModel.Fax,
-                CustomerID = dtoModel.CustomerID,
-                Country = dtoModel.Country,
-                ContactTitle = dtoModel.ContactTitle,
-                ContactName = dtoModel.ContactName,
-                CompanyName = dtoModel.CompanyName,
-                City = dtoModel.City
-            };
+            var customer =
+                Mapper.Map<CustomerDto, Customers>(dtoModel);
             _customerRepository.Create(customer);
         }
 
@@ -76,20 +51,7 @@ namespace NorthWindPracticeWeb.Service
         {
             var customer = _customerRepository
                 .Query(x => x.CustomerID == customerId).FirstOrDefault();
-            return new CustomerDto
-            {
-                Address = customer.Address,
-                Region = customer.Region,
-                PostalCode = customer.PostalCode,
-                Phone = customer.Phone,
-                Fax = customer.Fax,
-                CustomerID = customer.CustomerID,
-                Country = customer.Country,
-                ContactTitle = customer.ContactTitle,
-                ContactName = customer.ContactName,
-                CompanyName = customer.CompanyName,
-                City = customer.City
-            };
+           return Mapper.Map<Customers, CustomerDto>(customer);
         }
 
         public void DeleteCustomer(string customerId)
