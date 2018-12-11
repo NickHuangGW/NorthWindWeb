@@ -41,11 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DTOs\CustomerDto.cs" />
     <Compile Include="DTOs\OrderDto.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="Interface\ICustomerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\NorthWindPracticeWeb.Repository\NorthWindPracticeWeb.Repository.csproj">
+      <Project>{C3B0295B-BB3C-4FC4-BF17-325167CD359D}</Project>
+      <Name>NorthWindPracticeWeb.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
