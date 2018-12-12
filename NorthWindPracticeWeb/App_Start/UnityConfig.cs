@@ -6,6 +6,7 @@ using Unity;
 using NorthWindPracticeWeb.Repository.Models;
 using NorthWindPracticeWeb.Service;
 using NorthWindPracticeWeb.Service.Interface;
+using Unity.Injection;
 
 namespace NorthWindPracticeWeb
 {
@@ -47,9 +48,9 @@ namespace NorthWindPracticeWeb
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-
+            var db = new NorthWindModels();
             //UnitOfWork
-            container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>(new InjectionConstructor(db));
 
             // Repository
             container.RegisterType<IGenericRepository<Customers>, GenericRepository<Customers>>();

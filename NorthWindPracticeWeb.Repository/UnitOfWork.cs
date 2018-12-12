@@ -20,9 +20,9 @@ namespace NorthWindPracticeWeb.Repository
         /// <summary>
         /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
         /// </summary>
-        public UnitOfWork()
+        public UnitOfWork(DbContext dbContext)
         {
-            UnitDbContext = new NorthWindModels();
+            UnitDbContext = dbContext;
         }
         /// <summary>
         /// Commits the trans.

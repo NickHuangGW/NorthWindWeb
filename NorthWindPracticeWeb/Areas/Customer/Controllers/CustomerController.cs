@@ -19,8 +19,8 @@ namespace NorthWindPracticeWeb.Areas.Customer.Controllers
 
         public CustomerController(ICustomerService customerService, IUnitOfWork unitOfWork)
         {
-            _customerService = customerService;
             _unitOfWork = unitOfWork;
+            _customerService = customerService;
         }
 
         // GET: Customer/Customer
