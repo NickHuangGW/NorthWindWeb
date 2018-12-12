@@ -48,6 +48,7 @@ namespace NorthWindPracticeWeb
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
 
+            //UnitOfWork
             container.RegisterType<IUnitOfWork, UnitOfWork>();
 
             // Repository
