@@ -14,10 +14,10 @@ namespace NorthWindPracticeWeb.FilterAttribute
             }
 
             var errorMessage = filterContext.Exception.Message;
-            //todo Log將錯誤訊息接住
+            //todo Log將錯誤訊息接住並記錄下來
             filterContext.ExceptionHandled = true;
             filterContext.Controller.ViewData["ErrorMessage"] = ErrorMessage;
-            filterContext.Result=new ViewResult {ViewName = "Error.cshtml" };
+            filterContext.Result = new ViewResult { MasterName = "", ViewName = "Error" };
         }
     }
 }

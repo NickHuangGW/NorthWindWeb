@@ -4,8 +4,10 @@ using NorthWindPracticeWeb.Repository.Interfaces;
 using NorthWindPracticeWeb.Service.DTOs;
 using NorthWindPracticeWeb.Service.Interface;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using NorthWindPracticeWeb.Controllers;
+using X.PagedList;
 
 namespace NorthWindPracticeWeb.Areas.Customer.Controllers
 {
@@ -31,7 +33,7 @@ namespace NorthWindPracticeWeb.Areas.Customer.Controllers
             var dtoModels = _customerService.GetCustomers();
             var viewModels =
                 Mapper.Map<IEnumerable<CustomerDto>, IEnumerable<CustomerViewModel>>(dtoModels);
-            return View("_List", viewModels);
+            return View("_List", viewModels.ToPagedList(pageNumber,pageSize));
         }
         public ActionResult Create()
         {
