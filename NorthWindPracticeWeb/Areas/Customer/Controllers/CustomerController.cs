@@ -71,7 +71,7 @@ namespace NorthWindPracticeWeb.Areas.Customer.Controllers
                 return View(viewModel);
             }
             var dto = Mapper.Map<CustomerViewModel, CustomerDto>(viewModel);
-            _customerService.CreateCustomer(dto);
+            _customerService.EditCustomer(dto);
             _unitOfWork.CommitTrans();
             return RedirectToAction("Index");
         }
