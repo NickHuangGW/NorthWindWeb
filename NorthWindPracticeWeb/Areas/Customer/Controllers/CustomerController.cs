@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using AutoMapper;
 using NorthWindPracticeWeb.Models;
+using NorthWindPracticeWeb.Repository.Interfaces;
 using NorthWindPracticeWeb.Service.DTOs;
 using NorthWindPracticeWeb.Service.Interface;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using NorthWindPracticeWeb.Controllers;
 
 namespace NorthWindPracticeWeb.Areas.Customer.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerController : BaseController
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ICustomerService _customerService;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerService customerService, IUnitOfWork unitOfWork)
         {
             _customerService = customerService;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Customer/Customer
@@ -36,13 +37,61 @@ namespace NorthWindPracticeWeb.Areas.Customer.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CustomerViewModel viewModel)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return View(viewModel);
+            }
+            var dto = Mapper.Map<CustomerViewModel, CustomerDto>(viewModel);
+            _customerService.CreateCustomer(dto);
+            _unitOfWork.CommitTrans();
+            return RedirectToAction("Index");
+        }
         public ActionResult Edit(string customerId)
         {
-            return View(_customerService.GetCustomerById(customerId));
+            var customer = _customerService.GetCustomerById(customerId);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = Mapper.Map<CustomerDto, CustomerViewModel>(customer);
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(CustomerViewModel viewModel)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return View(viewModel);
+            }
+            var dto = Mapper.Map<CustomerViewModel, CustomerDto>(viewModel);
+            _customerService.CreateCustomer(dto);
+            _unitOfWork.CommitTrans();
+            return RedirectToAction("Index");
         }
         public ActionResult Delete(string customerId)
         {
-            return View(_customerService.GetCustomerById(customerId));
+            var customer = _customerService.GetCustomerById(customerId);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = Mapper.Map<CustomerDto, CustomerViewModel>(customer);
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCustomer(string customerId)
+        {
+            _customerService.DeleteCustomer(customerId);
+            _unitOfWork.CommitTrans();
+            return RedirectToAction("Index");
+
         }
     }
 }
