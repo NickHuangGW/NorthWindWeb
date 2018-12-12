@@ -71,6 +71,20 @@ namespace NorthWindPracticeWeb.Service.Test.Implements
         [TestMethod]
         [Owner("Nick")]
         [TestCategory("CustomerService")]
+        [TestProperty("CustomerService", "CreateCustomer")]
+        public void CreateCustomer_新增客戶資料為空_應拋出ArgumentNullException()
+        {
+            //arrange (準備)
+            var sut = GetSystemUnderTest();
+
+            //act (執行)
+            Action action = () => sut.CreateCustomer(null);
+            //assert (驗證)
+            action.Should().Throw<ArgumentNullException>();
+        }
+        [TestMethod]
+        [Owner("Nick")]
+        [TestCategory("CustomerService")]
         [TestProperty("CustomerService", "EditCustomer")]
         public void EditCustomer_修改客戶資料_應不會拋出錯誤()
         {
@@ -88,6 +102,20 @@ namespace NorthWindPracticeWeb.Service.Test.Implements
             Action action = () => sut.EditCustomer(dto);
             //assert (驗證)
             action.Should().NotThrow<Exception>();
+        }
+                [TestMethod]
+        [Owner("Nick")]
+        [TestCategory("CustomerService")]
+        [TestProperty("CustomerService", "EditCustomer")]
+        public void EditCustomer_修改客客戶資料為空_應拋出ArgumentNullException()
+        {
+            //arrange (準備)
+            var sut = GetSystemUnderTest();
+
+            //act (執行)
+            Action action = () => sut.EditCustomer(null);
+            //assert (驗證)
+            action.Should().Throw<ArgumentNullException>();
         }
         [TestMethod]
         [Owner("Nick")]
@@ -113,6 +141,20 @@ namespace NorthWindPracticeWeb.Service.Test.Implements
         [TestMethod]
         [Owner("Nick")]
         [TestCategory("CustomerService")]
+        [TestProperty("CustomerService", "GetCustomerById")]
+        public void GetCustomerById_輸入CustomerID為空_應拋出ArgumentNullException()
+        {
+            //arrange (準備)
+            var sut = GetSystemUnderTest();
+
+            //act (執行)
+            Action action = () => sut.GetCustomerById(null);
+            //assert (驗證)
+            action.Should().Throw<ArgumentNullException>();
+        }
+        [TestMethod]
+        [Owner("Nick")]
+        [TestCategory("CustomerService")]
         [TestProperty("CustomerService", "DeleteCustomer")]
         public void DeleteCustomer_刪除客戶資料_應不會拋出錯誤()
         {
@@ -130,6 +172,20 @@ namespace NorthWindPracticeWeb.Service.Test.Implements
             Action action = () => sut.DeleteCustomer(dto.CustomerID);
             //assert (驗證)
             action.Should().NotThrow<Exception>();
+        }
+        [TestMethod]
+        [Owner("Nick")]
+        [TestCategory("CustomerService")]
+        [TestProperty("CustomerService", "DeleteCustomer")]
+        public void DeleteCustomer_刪除客戶資料輸入CustomerID為空_應拋出ArgumentNullException()
+        {
+            //arrange (準備)
+            var sut = GetSystemUnderTest();
+
+            //act (執行)
+            Action action = () => sut.DeleteCustomer(null);
+            //assert (驗證)
+            action.Should().Throw<ArgumentNullException>();
         }
     }
 }
