@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using NorthWindPracticeWeb.Common.Extensions;
 using NorthWindPracticeWeb.Repository.Interfaces;
 using NorthWindPracticeWeb.Repository.Models;
 using NorthWindPracticeWeb.Service.DTOs;
@@ -27,6 +29,10 @@ namespace NorthWindPracticeWeb.Service
 
         public void CreateCustomer(CustomerDto dtoModel)
         {
+            if (dtoModel == null)
+            {
+                throw new ArgumentNullException(nameof(dtoModel));
+            }
             var customer =
                 Mapper.Map<CustomerDto, Customers>(dtoModel);
             _customerRepository.Create(customer);
@@ -34,6 +40,10 @@ namespace NorthWindPracticeWeb.Service
 
         public void EditCustomer(CustomerDto dtoModel)
         {
+            if (dtoModel == null)
+            {
+                throw new ArgumentNullException(nameof(dtoModel));
+            }
             var customer = _customerRepository
                 .Query(x => x.CustomerID == dtoModel.CustomerID).FirstOrDefault();
             customer.CompanyName = dtoModel.CompanyName;
@@ -49,6 +59,10 @@ namespace NorthWindPracticeWeb.Service
 
         public CustomerDto GetCustomerById(string customerId)
         {
+            if (customerId.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentNullException(nameof(customerId));
+            }
             var customer = _customerRepository
                 .Query(x => x.CustomerID == customerId).FirstOrDefault();
            return Mapper.Map<Customers, CustomerDto>(customer);
@@ -56,6 +70,10 @@ namespace NorthWindPracticeWeb.Service
 
         public void DeleteCustomer(string customerId)
         {
+            if (customerId.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentNullException(nameof(customerId));
+            }
             var customer = _customerRepository
                 .Query(x => x.CustomerID == customerId).FirstOrDefault();
             _customerRepository.Delete(customer);

@@ -55,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NorthWindPracticeWeb.Common\NorthWindPracticeWeb.Common.csproj">
+      <Project>{ad8e0e0e-5ee4-44a1-9f67-7bf1e03e5c68}</Project>
+      <Name>NorthWindPracticeWeb.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NorthWindPracticeWeb.Repository\NorthWindPracticeWeb.Repository.csproj">
       <Project>{C3B0295B-BB3C-4FC4-BF17-325167CD359D}</Project>
       <Name>NorthWindPracticeWeb.Repository</Name>
